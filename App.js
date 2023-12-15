@@ -1,22 +1,29 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar, StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import Home from './views/Home';
+
+import * as color from './styles/variables/colors';
+import * as text from './styles/texts';
+import * as layout from './styles/layouts';
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={StyleSheet.compose(
+        layout.container, {
+          backgroundColor: color.gray,
+        }
+      )}
+    >
+      <StatusBar style="auto" />
+      <View style={layout.titleContainer}>
+        <Text style={text.mainTitle}>Pocke Wiki</Text>
+      </View>
       <Home />
-      {/* <StatusBar style="auto" /> */}
-    </View>
+    </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+// style={StyleSheet.compose(
+//   variable, {
+//   }
+// )}
