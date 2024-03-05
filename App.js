@@ -1,29 +1,28 @@
 import React from 'react';
-import { StatusBar, StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './views/Home';
+import PokeView from './views/PokeView';
 
-import * as color from './styles/variables/colors';
-import * as text from './styles/texts';
-import * as layout from './styles/layouts';
+const Stack = createNativeStackNavigator();
 
-export default function App() {
+function App() {
   return (
-    <SafeAreaView style={StyleSheet.compose(
-        layout.container, {
-          backgroundColor: color.gray,
-        }
-      )}
-    >
-      <StatusBar style="auto" />
-      <View style={layout.titleContainer}>
-        <Text style={text.mainTitle}>Pocke Wiki</Text>
-      </View>
-      <Home />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator 
+        initialRouteName="PokeList"
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen 
+          name="Home" 
+          component={Home}
+        />
+        <Stack.Screen name="PokeView" component={PokeView}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-// style={StyleSheet.compose(
-//   variable, {
-//   }
-// )}
+export default App;
