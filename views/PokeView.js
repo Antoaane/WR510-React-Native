@@ -11,6 +11,7 @@ export default function PokeView({ route }) {
     const { id } = route.params;
 
     const [data, setData] = useState([]);
+    const [stats, setStats] = useState([]);
     const [loading, setLoading] = useState(true);
      
     useEffect(() => {
@@ -19,6 +20,7 @@ export default function PokeView({ route }) {
             try {
                 const response = await axios.get(apiLink);
                 setData(response.data);
+                setStats(response.data.stats);
             } catch (error) {
                 console.log(error);
             } finally {
@@ -41,6 +43,17 @@ export default function PokeView({ route }) {
             <View style={layout.titleContainer}>
                 <Text style={text.mainTitle}>{data.name}</Text>
             </View> 
+            <View>
+                {stats.map((stat, index) => (
+                    <View 
+                        style={layout.titleContainer}
+                        key={index}
+                    >
+                        <Text>{stat.stat.name}</Text>
+                        <Text>{stat.base_stat}</Text>
+                    </View>
+                ))}
+            </View>
             <Text >Poids : {data.weight} lbs</Text>
             <Image
                 style={styles.cardImage}
@@ -72,8 +85,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     cardImage: {
-        width: '80%',
-        height: '70%',
+        width: '100%',
+        height: '40%',
+        objectFit: 'contain',
     },
 });
 
