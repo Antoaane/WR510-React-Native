@@ -41,7 +41,7 @@ export default function App() {
             <StatusBar style="auto" />
             <View style={layout.container}>
                 <View style={layout.titleContainer}>
-                    <Text style={text.mainTitle}>Pocke Wiki</Text>
+                    <Text style={text.mainTitle}>Poke Wiki</Text>
                 </View>
                 <ScrollView>
                     <TouchableOpacity 
