@@ -1,6 +1,7 @@
-import { SafeAreaView, StyleSheet, View, Image, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import * as color from '../styles/variables/colors';
 import * as text from '../styles/texts';
@@ -12,8 +13,27 @@ export default function PokeView({ route }) {
 
     const [data, setData] = useState([]);
     const [stats, setStats] = useState([]);
+    const [inPokedex, setInPokedex] = useState(false);
     const [loading, setLoading] = useState(true);
-     
+
+    const checkPokedex = async () => {
+        try {
+            const value = await AsyncStorage.getItem('pokedex');
+            if (value !== null) {
+                const table = JSON.parse(value);
+                if (table.includes(id)) {
+                    setInPokedex(true);
+                } else {
+                    setInPokedex(false);
+                }
+            } else {
+                setInPokedex(false);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     useEffect(() => {
         const fetchData = async () => {
             const apiLink = `https://pokeapi.co/api/v2/pokemon/${id}`;
@@ -28,7 +48,34 @@ export default function PokeView({ route }) {
             }
         };
         fetchData();
+        checkPokedex();
     }, []);
+
+
+    const pokedex = async () => {
+        try {
+            const value = await AsyncStorage.getItem('pokedex');
+            if (value !== null) {
+                const newTable = JSON.parse(value);
+                if (newTable.includes(id)) {
+                    newTable.splice(newTable.indexOf(id), 1);
+                    await AsyncStorage.setItem('pokedex', JSON.stringify(newTable));
+                    setInPokedex(false);
+                } else {
+                    newTable.push(id);
+                    await AsyncStorage.setItem('pokedex', JSON.stringify(newTable));
+                    setInPokedex(true);
+                }
+            } else {
+                const newTable = [id];
+            
+                await AsyncStorage.setItem('pokedex', JSON.stringify(newTable));
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        checkPokedex();
+    }
 
     if (loading) {
         return (
@@ -59,6 +106,12 @@ export default function PokeView({ route }) {
                 style={styles.cardImage}
                 source={{ uri: data.sprites.front_default }}
             />
+            <TouchableOpacity 
+                style={layout.titleContainer}
+                onPress={() => pokedex()}
+            >
+                <Text>{inPokedex ? 'Supprimer du' : 'Ajouter au'} Pokedex</Text>
+            </TouchableOpacity>
         </View>
     );
 }
