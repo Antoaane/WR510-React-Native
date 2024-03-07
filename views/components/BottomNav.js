@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 import Home from '../Home';
 import Pokedex from '../Pokedex';
@@ -26,8 +26,11 @@ export default function BottomNav() {
 
                     return <Ionicons name={iconName} size={size} color={color} />;
                 },
-                tabBarActiveTintColor: 'tomato',
+                tabBarActiveTintColor: 'blue',
                 tabBarInactiveTintColor: 'gray',
+                tabBarLabelStyle: {
+                    fontSize: 0,
+                  },
                 headerShown: false,
             })}
         >

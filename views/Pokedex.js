@@ -7,8 +7,8 @@ import axios from 'axios';
 import PokeCard from './components/PokeCard';
 
 import * as color from '../styles/variables/colors';
-import * as text from '../styles/texts';
-import * as layout from '../styles/layouts';
+import { texts } from '../styles/texts';
+import { layouts } from '../styles/layouts';
 
 export default function Pokedex() {
     const [data, setData] = useState([]);
@@ -45,20 +45,20 @@ export default function Pokedex() {
 
     return (
         <SafeAreaView style={StyleSheet.compose(
-            layout.container, {
+            layouts.container, {
               backgroundColor: color.gray,
             }
           )}
         >
             <StatusBar style="auto" />
-            <View style={layout.container}>
-                <View style={layout.titleContainer}>
-                    <Text style={text.mainTitle}>Pokedex</Text>
+            <View style={layouts.container}>
+                <View style={layouts.titleContainer}>
+                    <Text style={texts.mainTitle}>Pokedex</Text>
                 </View>
                 <ScrollView>
                     <TouchableOpacity 
                         style={StyleSheet.compose(
-                            layout.container, {
+                            layouts.container, {
                                 display: 'flex',
                                 flexDirection: 'row',
                                 flexWrap: 'wrap',

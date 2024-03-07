@@ -4,8 +4,8 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import * as color from '../styles/variables/colors';
-import * as text from '../styles/texts';
-import * as layout from '../styles/layouts';
+import { texts } from '../styles/texts';
+import { layouts } from '../styles/layouts';
 
 
 export default function PokeView({ route }) {
@@ -79,38 +79,48 @@ export default function PokeView({ route }) {
 
     if (loading) {
         return (
-            <View style={layout.container}>
+            <View style={layouts.container}>
                 <Text>Loading...</Text>
             </View>
         );
     }
 
     return (
-        <View style={layout.container}>
-            <View style={layout.titleContainer}>
-                <Text style={text.mainTitle}>{data.name}</Text>
+        <View style={layouts.container}>
+            <View style={layouts.titleContainer}>
+                <Text style={texts.mainTitle}>{data.name}</Text>
             </View> 
             <View>
                 {stats.map((stat, index) => (
                     <View 
-                        style={layout.titleContainer}
+                        style={layouts.statContainer}
                         key={index}
                     >
-                        <Text>{stat.stat.name}</Text>
-                        <Text>{stat.base_stat}</Text>
+                        <Text style={styles.statTitle}>{stat.stat.name}</Text>
+                        <Text style={styles.statValue}>{stat.base_stat}</Text>
                     </View>
                 ))}
             </View>
-            <Text >Poids : {data.weight} lbs</Text>
+            <View 
+                style={layouts.statContainer}
+            >
+                <Text style={styles.statTitle}>Poids</Text>
+                <Text style={styles.statValue}>{data.weight}</Text>
+            </View>
             <Image
                 style={styles.cardImage}
                 source={{ uri: data.sprites.front_default }}
             />
             <TouchableOpacity 
-                style={layout.titleContainer}
+                style={[layouts.button, { 
+                    backgroundColor: inPokedex ? 'red' : color.yellow,
+                    shadowColor: inPokedex ? 'red' : color.yellow,
+                }]}
                 onPress={() => pokedex()}
             >
-                <Text>{inPokedex ? 'Supprimer du' : 'Ajouter au'} Pokedex</Text>
+                <Text style={ texts.buttonText }>
+                    {inPokedex ? 'Supprimer du' : 'Ajouter au'} Pokedex
+                </Text>
             </TouchableOpacity>
         </View>
     );
@@ -141,6 +151,16 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '40%',
         objectFit: 'contain',
+    },
+    statTitle: {
+        fontSize: 15,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: color.yellow,
+    },
+    statValue: {
+        fontSize: 15,
+        textAlign: 'center',
     },
 });
 
