@@ -12,4 +12,8 @@ export const texts = StyleSheet.create({
         fontWeight: 'bold',
         color: 'white',
     },
+    inputText: {
+        fontSize: 18,
+        color: 'white',
+    },
 });

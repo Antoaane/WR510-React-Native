@@ -1,4 +1,4 @@
-import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, Text, TouchableOpacity } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -89,7 +89,7 @@ export default function PokeView({ route }) {
         <View style={layouts.container}>
             <View style={layouts.titleContainer}>
                 <Text style={texts.mainTitle}>{data.name}</Text>
-            </View> 
+            </View>
             <View>
                 {stats.map((stat, index) => (
                     <View 
@@ -105,7 +105,7 @@ export default function PokeView({ route }) {
                 style={layouts.statContainer}
             >
                 <Text style={styles.statTitle}>Poids</Text>
-                <Text style={styles.statValue}>{data.weight}</Text>
+                <Text style={styles.statValue}>{data.weight} lbs</Text>
             </View>
             <Image
                 style={styles.cardImage}
@@ -115,6 +115,8 @@ export default function PokeView({ route }) {
                 style={[layouts.button, { 
                     backgroundColor: inPokedex ? 'red' : color.yellow,
                     shadowColor: inPokedex ? 'red' : color.yellow,
+                    position: 'absolute',
+                    bottom: 5,
                 }]}
                 onPress={() => pokedex()}
             >
@@ -148,12 +150,13 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     cardImage: {
+        marginVertical: 10,
         width: '100%',
-        height: '40%',
+        height: '32.5%',
         objectFit: 'contain',
     },
     statTitle: {
-        fontSize: 15,
+        fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center',
         color: color.yellow,
@@ -161,6 +164,7 @@ const styles = StyleSheet.create({
     statValue: {
         fontSize: 15,
         textAlign: 'center',
+        color: color.blue,
     },
 });
 

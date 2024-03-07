@@ -56,6 +56,22 @@ export const layouts = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
 
+        backgroundColor: colors.yellow,
+        elevation: 4,
+
+        borderRadius: 10,
+    },
+    input: {
+        width: '92.5%',
+        padding: 12.5,
+        marginHorizontal: '3.75%',
+        marginVertical: '1%',
+        
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+
+        backgroundColor: colors.gray,
         elevation: 4,
 
         borderRadius: 10,

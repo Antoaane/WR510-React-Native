@@ -4,6 +4,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 import Home from '../Home';
 import Pokedex from '../Pokedex';
+import Searching from '../Searching';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,6 +23,10 @@ export default function BottomNav() {
                         iconName = focused
                             ? 'book'
                             : 'book-outline';
+                    } else if (route.name === 'Searching') {
+                        iconName = focused
+                            ? 'search'
+                            : 'search-outline';
                     }
 
                     return <Ionicons name={iconName} size={size} color={color} />;
@@ -36,6 +41,7 @@ export default function BottomNav() {
         >
             <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="Pokedex" component={Pokedex} />
+            <Tab.Screen name="Searching" component={Searching} />
         </Tab.Navigator>
     );
 }
