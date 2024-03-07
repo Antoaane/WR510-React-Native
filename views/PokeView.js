@@ -109,7 +109,7 @@ export default function PokeView({ route }) {
             </View>
             <Image
                 style={styles.cardImage}
-                source={{ uri: data.sprites.front_default }}
+                source={{ uri: data.sprites.other.showdown.front_default }}
             />
             <TouchableOpacity 
                 style={[layouts.button, { 

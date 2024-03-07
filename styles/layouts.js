@@ -26,7 +26,7 @@ export const layouts = StyleSheet.create({
         shadowRadius: 2.62,
         elevation: 4,
 
-        backgroundColor: 'white',
+        backgroundColor: colors.yellow,
         borderRadius: 10,
     },
     statContainer: {

@@ -28,12 +28,14 @@ export default function PokeCard(props) {
 
 const styles = StyleSheet.create({
     card: {
-        width: '28.5%',
+        width: '30%',
         aspectRatio: 1,
-        marginVertical: 10,
+        margin: 5,
         paddingVertical: 10,
+
         borderRadius: 15,
         backgroundColor: '#fff',
+
         display: 'flex',
         alignItems: 'center',
         overflow: 'hidden',
