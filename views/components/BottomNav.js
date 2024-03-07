@@ -6,6 +6,8 @@ import Home from '../Home';
 import Pokedex from '../Pokedex';
 import Searching from '../Searching';
 
+import * as color from '../../styles/variables/colors';
+
 const Tab = createBottomTabNavigator();
 
 export default function BottomNav() {
@@ -31,8 +33,8 @@ export default function BottomNav() {
 
                     return <Ionicons name={iconName} size={size} color={color} />;
                 },
-                tabBarActiveTintColor: 'blue',
-                tabBarInactiveTintColor: 'gray',
+                tabBarActiveTintColor: color.yellow,
+                tabBarInactiveTintColor: color.blue,
                 tabBarLabelStyle: {
                     fontSize: 0,
                   },

@@ -4,6 +4,7 @@ import PokeCard from './components/PokeCard';
 
 import { texts } from '../styles/texts';
 import { layouts } from '../styles/layouts';
+import * as color from '../styles/variables/colors';
 
 export default function Searching() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -25,7 +26,7 @@ export default function Searching() {
                     <Text style={texts.mainTitle}>Search</Text>
                 </View>
             <TextInput
-                style={layouts.input}
+                style={[layouts.input, texts.inputText, { color : color.blue }]}
                 placeholder="Enter a Pokemon name"
                 value={searchTerm}
                 onChangeText={setSearchTerm}
