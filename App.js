@@ -1,51 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './views/Home';
+import PokeView from './views/PokeView';
+import MyTabs from './views/components/BottomNav';
 
-export default function App() {
-  const [data, setData] = useState([]);
+const Stack = createNativeStackNavigator();
 
-  //request to randomuser api with axios
-  useEffect(() => {
-    const fetchData = async () => {
-      axios.get('https://randomuser.me/api/?results=30')
-        .then(response => {
-          setData(response.data.results);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    };
-    fetchData();
-  }, []);
-
-  console.log(data);
-  //loop through data and display all first names
-  const users = data.map((item, index) => {
-    return (
-      <View key={index}>
-        <Text>{item.name.first}</Text>
-      </View>
-    );
-  });
-
-
-
+function App() {
   return (
-    <View style={styles.container}>
-      <Text> Users </Text>
-      {users}
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator 
+        initialRouteName="PokeList"
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen 
+          name="Tabs" 
+          component={MyTabs}
+        />
+        <Stack.Screen 
+          name="Home" 
+          component={Home}
+        />
+        <Stack.Screen name="PokeView" component={PokeView}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#279df5cc',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
